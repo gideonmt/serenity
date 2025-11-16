@@ -361,16 +361,45 @@ pub struct Ready {
     pub version: u8,
     /// Information about the user including email
     pub user: CurrentUser,
+    #[serde(skip)]
+
+    pub user_settings: Option<String>,
+    pub user_settings_proto: Option<String>,
     /// Guilds the user is in
-    pub guilds: Vec<UnavailableGuild>,
+    //pub guilds: Vec<UnavailableGuild>,
+    pub guilds: Vec<Guild>,
+    #[serde(skip)]
+    pub guild_join_requests: Vec<String>,
+    #[serde(skip)]
+    pub relationships: Option<Vec<String>>,
+    pub friend_suggestion_count: Option<u32>,
+    pub private_channels: Vec<Channel>,
+    pub connected_accounts: Vec<Connection>,
+    pub notes: HashMap<UserId, String>,
+    pub presences: Vec<Presence>,
+    #[serde(skip)]
+    pub merged_presences: Option<Vec<String>>,
+    pub users: Option<Vec<User>>,
+    pub application: Option<PartialCurrentApplicationInfo>,
     /// Used for resuming connections
     pub session_id: String,
+    pub session_type: String,
+    pub auth_session_id_hash: String,
+    /// Refreshed auth token for this user; The client should replentish the auth token with this if it exists
+    pub auth_token: Option<String>,
+    pub analytics_token: String,
+    pub authenticator_types: Option<Vec<u8>>,
+    pub required_action: Option<String>,
+    pub country_code: String,
+    pub geo_ordered_rtc_regions: Vec<String>,
+    pub tutorial: Option<String>,
+    pub shard: Option<ShardInfo>,
     /// Gateway URL for resuming connections
     pub resume_gateway_url: String,
     /// Shard information associated with this session, if sent when identifying
-    pub shard: Option<ShardInfo>,
+    //pub shard: Option<ShardInfo>,
     /// Contains id and flags
-    pub application: PartialCurrentApplicationInfo,
+    //pub application: PartialCurrentApplicationInfo,
 }
 
 /// Information describing how many gateway sessions you can initiate within a ratelimit period.
