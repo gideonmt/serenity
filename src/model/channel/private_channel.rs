@@ -20,15 +20,17 @@ pub struct PrivateChannel {
     ///
     /// Can be used to calculate the first message's creation date.
     pub id: ChannelId,
+    /// Channel type
+    /// 
+    /// This should always be [`ChannelType::Private`] or [`ChannelType::GroupDM`]
+    #[serde(rename = "type")]
+    pub kind: ChannelType,
+    /// The channel name
+    pub name: Option<String>,
     /// The Id of the last message sent.
     pub last_message_id: Option<MessageId>,
     /// Timestamp of the last time a [`Message`] was pinned.
     pub last_pin_timestamp: Option<Timestamp>,
-    /// Indicator of the type of channel this is.
-    ///
-    /// This should always be [`ChannelType::Private`].
-    #[serde(rename = "type")]
-    pub kind: ChannelType,
     /// The recipient to the private channel.
     /// 
     /// This will always be a single user in the case of [`ChannelType::Private`]. Can be empty in the case of [`ChannelType::GroupDM`] if it is a group with just the current user
